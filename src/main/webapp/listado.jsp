@@ -18,18 +18,25 @@ border: 1;
 <body>
 <%
 TiendaService service = new TiendaService();
-List<Producto> productos = TiendaService.getProductos();
+List<Producto> productos = TiendaService.getTiendaRepositorio().getProductos();
 %>
 <table>
-<tr><th>Nombre</th><th>Seccion</th><th>Precio</th><th>Stock</th><th>Modificar</th><th>Eliminar</th></tr>
+<tr><th>Id_Producto</th><th>Nombre</th><th>Seccion</th><th>Precio</th><th>Stock</th><th>Modificar</th><th>Eliminar</th></tr>
 <%
 for(int i = 0; i < productos.size(); i++){
 	%><tr>
+	<td><%=productos.get(i).getId() %></td>
 	<td><%=productos.get(i).getNombre() %></td>
 	<td><%=productos.get(i).getSeccion() %></td>
 	<td><%=productos.get(i).getPrecio() %></td>
 	<td><%=productos.get(i).getStock() %></td>
-	<td>modify/producto=<%=productos.get(i).getId() %></td>
+	<td>
+		<form action="ModificarProducto" method="post">
+<%String id =  productos.get(i).getId().toString();%>
+		<input type="number" name="idProducto" value="<%=id%>" hidden="true">
+		<button	type="submit" value="Entrar" >Editar</button>
+	</form>
+	</td>
 	<td>delete/producto=<%=productos.get(i).getId() %></td>
 	</tr> <%
 }

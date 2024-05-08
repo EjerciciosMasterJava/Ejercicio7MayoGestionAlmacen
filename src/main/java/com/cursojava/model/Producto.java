@@ -14,7 +14,7 @@ public class Producto {
 	}
 	public Producto(String nombre, String seccion, Double precio, Integer stock) {
 		super();
-		this.id = TiendaService.getNextId();
+		this.id = TiendaService.getTiendaRepositorio().getNextId();
 		this.nombre = nombre;
 		this.seccion = seccion;
 		this.precio = precio;

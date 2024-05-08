@@ -1,5 +1,6 @@
 package com.cursojava.controller;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,13 +11,17 @@ import java.util.List;
 
 import com.cursojava.model.Producto;
 import com.cursojava.service.TiendaService;
+import com.cursojava.repositorio.*;
 
 /**
  * Servlet implementation class ModificarProducto
  */
 public class ModificarProducto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private List<Producto> productos = TiendaService.getProductos();
+	
+	private TiendaRepositorio tienda = TiendaService.getTiendaRepositorio();
+	
+	private List<Producto> productos = TiendaService.getTiendaRepositorio().getProductos();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -30,15 +35,20 @@ public class ModificarProducto extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		RequestDispatcher rd = request.getRequestDispatcher("alta.jsp");
+		rd.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		System.out.println("Entrando ModificarProducto POST");
+		Long idProducto = Long.parseLong(request.getParameter("idProducto"));
+		System.out.println("ModificarProducto POST - idProducto = " + idProducto);
+		//Producto producto = productos.parallelStream().filter(p -> p.getId().equals(idProducto)).findFirst().get();
+		Producto producto = tienda.getProductoById(idProducto);
+		request.setAttribute("producto", producto);
 		doGet(request, response);
 	}
 

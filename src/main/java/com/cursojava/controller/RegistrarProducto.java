@@ -7,8 +7,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 import com.cursojava.model.Producto;
+import com.cursojava.repositorio.TiendaRepositorio;
 import com.cursojava.service.TiendaService;
 
 /**
@@ -17,7 +19,7 @@ import com.cursojava.service.TiendaService;
 public class RegistrarProducto extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private TiendaService tiendaService;
+	private TiendaRepositorio tienda = TiendaService.getTiendaRepositorio();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -42,16 +44,27 @@ public class RegistrarProducto extends HttpServlet {
 		String ret = "";
 		Producto producto = null;
 		try {
-			tiendaService = new TiendaService();
+			Long id = null;
 			String nombre = request.getParameter("nombre");
 			String seccion = request.getParameter("seccion");
 			Double precio = Double.parseDouble(request.getParameter("precio"));
 			Integer stock = Integer.parseInt(request.getParameter("stock"));
+			
+			try {
+				id = Long.parseLong(request.getParameter("idProducto"));
+				System.out.println("Modificando producto con id " + id);
+			}catch(Exception e) {
+				
+			}
 			producto = new Producto(nombre, seccion, precio, stock);
-			
-			tiendaService.agregarProducto(producto);
-			
-			ret = "Producto registrado correctamente.";
+			if(id == null) {
+				tienda.agregarNuevoProducto(producto);
+				ret = "Producto registrado correctamente.";
+			}else {
+				tienda.modificaProducto(id, producto);
+				ret = "Producto actualizado correctamente.";
+			}
+
 		} catch (Exception e) {
 			ret = "Error al registrar el producto.";
 		}
