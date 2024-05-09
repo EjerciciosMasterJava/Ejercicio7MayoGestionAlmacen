@@ -49,4 +49,24 @@
     <servlet-name>ModificarProducto</servlet-name>
     <url-pattern>/ModificarProducto</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>FiltrarProductos</display-name>
+    <servlet-name>FiltrarProductos</servlet-name>
+    <servlet-class>com.cursojava.controller.FiltrarProductos</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>FiltrarProductos</servlet-name>
+    <url-pattern>/FiltrarProductos</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ListarProductos</display-name>
+    <servlet-name>ListarProductos</servlet-name>
+    <servlet-class>com.cursojava.controller.ListarProductos</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ListarProductos</servlet-name>
+    <url-pattern>/ListarProductos</url-pattern>
+  </servlet-mapping>
 </web-app>

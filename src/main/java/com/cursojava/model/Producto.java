@@ -12,6 +12,14 @@ public class Producto {
 	public Producto() {
 		super();
 	}
+	public Producto(Long id, String nombre, String seccion, Double precio, Integer stock) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.seccion = seccion;
+		this.precio = precio;
+		this.stock = stock;
+	}
 	public Producto(String nombre, String seccion, Double precio, Integer stock) {
 		super();
 		this.id = TiendaService.getTiendaRepositorio().getNextId();

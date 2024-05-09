@@ -7,14 +7,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import com.cursojava.repositorio.TiendaRepositorio;
 import com.cursojava.service.TiendaService;
 
 /**
- * Servlet implementation class EliminarProducto
+ * Servlet implementation class ListarProductos
  */
-public class EliminarProducto extends HttpServlet {
+public class ListarProductos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	private TiendaRepositorio tienda = TiendaService.getTiendaRepositorio();
@@ -22,15 +23,16 @@ public class EliminarProducto extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public EliminarProducto() {
+    public ListarProductos() {
         super();
-        // TODO Auto-generated constructor stubasdfasdfasdf
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		tienda.setProductosFiltrados(new ArrayList<>());
 		RequestDispatcher rd = request.getRequestDispatcher("listado.jsp");
 		rd.forward(request, response);
 	}
@@ -39,13 +41,7 @@ public class EliminarProducto extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			Long id = Long.parseLong(request.getParameter("idProducto"));
-			tienda.eliminarProductoById(id);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

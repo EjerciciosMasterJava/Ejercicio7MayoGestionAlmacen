@@ -41,6 +41,7 @@ public class RegistrarProducto extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("section = " + request.getParameter("seccion"));
 		String ret = "";
 		Producto producto = null;
 		try {
@@ -51,24 +52,26 @@ public class RegistrarProducto extends HttpServlet {
 			Integer stock = Integer.parseInt(request.getParameter("stock"));
 			
 			try {
-				id = Long.parseLong(request.getParameter("idProducto"));
+				id = Long.parseLong(request.getParameter("id"));
+				
 				System.out.println("Modificando producto con id " + id);
 			}catch(Exception e) {
 				
 			}
 			producto = new Producto(nombre, seccion, precio, stock);
 			if(id == null) {
+				System.out.println("id producto = " + id);
 				tienda.agregarNuevoProducto(producto);
 				ret = "Producto registrado correctamente.";
 			}else {
+				System.out.println("entrando en actualizar producto");
 				tienda.modificaProducto(id, producto);
 				ret = "Producto actualizado correctamente.";
 			}
-
 		} catch (Exception e) {
 			ret = "Error al registrar el producto.";
 		}
-		request.setAttribute("producto", producto);
+
 		System.out.println(ret + producto);
 		request.setAttribute("ret", ret);
 		doGet(request, response);

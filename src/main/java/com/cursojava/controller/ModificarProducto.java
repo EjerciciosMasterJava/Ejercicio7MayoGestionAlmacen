@@ -2,7 +2,6 @@ package com.cursojava.controller;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,7 +20,6 @@ public class ModificarProducto extends HttpServlet {
 	
 	private TiendaRepositorio tienda = TiendaService.getTiendaRepositorio();
 	
-	private List<Producto> productos = TiendaService.getTiendaRepositorio().getProductos();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -46,9 +44,9 @@ public class ModificarProducto extends HttpServlet {
 		System.out.println("Entrando ModificarProducto POST");
 		Long idProducto = Long.parseLong(request.getParameter("idProducto"));
 		System.out.println("ModificarProducto POST - idProducto = " + idProducto);
-		//Producto producto = productos.parallelStream().filter(p -> p.getId().equals(idProducto)).findFirst().get();
 		Producto producto = tienda.getProductoById(idProducto);
 		request.setAttribute("producto", producto);
+		request.setAttribute("edit", "Editar producto" + producto.getNombre());
 		doGet(request, response);
 	}
 
