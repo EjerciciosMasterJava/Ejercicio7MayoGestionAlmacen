@@ -2,6 +2,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%@page import="com.cursojava.model.Producto"%>
 <!DOCTYPE html>
+
+<!-- BOOTSTRAP -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <html>
@@ -17,26 +19,11 @@
 </style>
 
 </head>
-<%
-Producto producto = null;
-String id = "";
-String nombre = "";
-String seccion = "";
-String precio = "";
-String stock = "";
-try {
-	producto = (Producto) request.getAttribute("producto");
-	nombre = (producto.getNombre() != null) ? producto.getNombre() : "";
-	seccion = (producto.getSeccion() != null) ? producto.getSeccion() : "";
-	precio = (producto.getPrecio() != null) ? producto.getPrecio().toString() : "";
-	stock = (producto.getStock() != null) ? producto.getStock().toString() : "";
-} catch (Exception e) {}
-
-try {
-	id = (producto.getId() != null) ? producto.getId().toString() : "";
-} catch (Exception e) {}
-%>
 <body>
+
+<!--  GET DETALLES DEL PRODUCTO PARA CUANDO EDITAMOS EN LUGAR DE ALTA -->
+<%@ include file="script/altaproductodetail.jsp" %>
+
 <%@ include file="nav.htm" %>
 
 	<%try {
@@ -57,15 +44,18 @@ try {
 							alt="Sample photo">
 						<div class="card-body p-4 p-md-5">
 
+							<!-- TITULO DE LA CARD -->
 							<h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Detalles producto</h3>
 
 							<form class="px-md-2" action="RegistrarProducto" method="post">
 
+								<!--  INPUT NOMBRE PRODUCTO -->
 								<div data-mdb-input-init class="form-outline mb-4">
 									<label class="form-label" for="nombre">Nombre</label> <input
 										type="text" id="nombre" class="form-control" name="nombre" value="<%=nombre%>"/>
 								</div>
 
+								<!--  INPUT SECCION PRODUCTO -->
 								<div data-mdb-input-init class="form-outline mb-4">
 									<label class="form-label" for="seccion">Seccion</label> <select
 										data-mdb-select-init id="seccion" name="seccion" value="<%=seccion%>">
@@ -76,20 +66,23 @@ try {
 									</select>
 								</div>
 								
-									<div data-mdb-input-init class="form-outline mb-4">
+								<div data-mdb-input-init class="form-outline mb-4">
 									<label class="form-label" for="id" hidden="true">id</label> <input type="number" id="id" class="form-control" name="id" value="<%=id%>" hidden="true"/>
 								</div>
 
+								<!--  INPUT PRECIO PRODUCTO -->
 								<div data-mdb-input-init class="form-outline mb-4">
 									<label class="form-label" for="precio">Precio</label> <input
 										type="number" id="precio" class="form-control" name="precio" value="<%=precio%>"/>
 								</div>
-
+								
+								<!--  INPUT STOCK PRODUCTO -->
 								<div data-mdb-input-init class="form-outline mb-4">
 									<label class="form-label" for="stock">Stock</label> <input
 										type="number" id="stock" class="form-control" name="stock" value="<%=stock%>"/>
 								</div>
 
+								<!--  BOTON ENVIAR -->
 								<button type="submit" data-mdb-button-init data-mdb-ripple-init
 									class="btn btn-success btn-lg mb-1">Submit</button>
 
@@ -105,7 +98,8 @@ try {
 </body>
 <footer>
 
-<%@ include file="footer.htm" %>
+	<!--  FOOTER  -->
+	<%@ include file="footer.htm" %>
 	
 </footer>
 </html>

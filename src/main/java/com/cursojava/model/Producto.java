@@ -9,9 +9,22 @@ public class Producto {
 	private String seccion;
 	private Double precio;
 	private Integer stock;
+	
+	/**
+	 * Constructor por defecto
+	 */
 	public Producto() {
 		super();
 	}
+	
+	/**
+	 * Constructor de producto con todos los parametros
+	 * @param id el id del producto
+	 * @param nombre el nombre del producto
+	 * @param seccion la seccion a la que pertenece el producto
+	 * @param precio el precio del producto
+	 * @param stock la cantidad de stock
+	 */
 	public Producto(Long id, String nombre, String seccion, Double precio, Integer stock) {
 		super();
 		this.id = id;
@@ -20,6 +33,14 @@ public class Producto {
 		this.precio = precio;
 		this.stock = stock;
 	}
+	
+	/**
+	 * Constructor de producto con todos los parametros menos el id
+	 * @param nombre el nombre del producto
+	 * @param seccion la seccion a la que pertenece el producto
+	 * @param precio el precio del producto
+	 * @param stock la cantidad de stock
+	 */
 	public Producto(String nombre, String seccion, Double precio, Integer stock) {
 		super();
 		this.id = TiendaService.getTiendaRepositorio().getNextId();

@@ -19,18 +19,14 @@ import com.cursojava.service.TiendaService;
 public class FiltrarProductos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private TiendaRepositorio tienda = TiendaService.getTiendaRepositorio();
+	private TiendaRepositorio tiendaRepositorio = TiendaService.getTiendaRepositorio();
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public FiltrarProductos() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Forward para volver al listado luego de filtrar la lista
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("listado.jsp");
@@ -38,18 +34,19 @@ public class FiltrarProductos extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Filtrar productos por su nombre, buscamos los productos que coincidan y agregamos la lista filtrada 
+	 * en el atributo productosFiltrados de la request
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String filtroNombre = request.getParameter("filtroNombre");
 		String filtroSeccion = request.getParameter("filtroSeccion");
 		
-		System.out.println(tienda.getProductos().size());
+		System.out.println(tiendaRepositorio.getProductos().size());
 		
 		System.out.println("nombre = " + filtroNombre + "seccion " + filtroSeccion);
 		
-		List<Producto> productosFiltrados = tienda.filtrarProductos(new Producto(filtroNombre,filtroSeccion, null, null));
+		List<Producto> productosFiltrados = tiendaRepositorio.filtrarProductos(new Producto(filtroNombre,filtroSeccion, null, null));
 		System.out.println("size lista filtrados " + productosFiltrados.size());
 		System.out.println("Lista de productos filtrados = " + productosFiltrados);
 		

@@ -102,7 +102,7 @@
 					<td>
 						<form action="EliminarProducto" method="post">
 							<input type="number" id="" name="idProducto" value="<%=id%>" hidden="true">
-							<input type="submit" onclick="clicked(event)" class="failed" value="Eliminar"/>
+							<input type="submit" onclick="clickEliminarProducto(event)" class="failed" value="Eliminar"/>
 						</form>
 					</td>
 				</tr>
@@ -115,9 +115,10 @@
 
  
     <script>
-    function clicked(e)
+    
+    function clickEliminarProducto(e)
     {
-        if(!confirm('Are you sure?')) {
+        if(!confirm('Estas seguro de eliminar el producto?')) {
             e.preventDefault();
         }
     }

@@ -20,17 +20,13 @@ public class ModificarProducto extends HttpServlet {
 	
 	private TiendaRepositorio tienda = TiendaService.getTiendaRepositorio();
 	
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
     public ModificarProducto() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * Forward al formulario de alta que se reutiliza para modificar, le pasamos el producto
+	 * a editar y asi aparecen los datos del producto en el formulario
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("alta.jsp");
@@ -38,7 +34,8 @@ public class ModificarProducto extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Modificar un producto, cogemos el id de la request del producto a editar,
+	 * buscamos el producto y lo agregamos en el atributo producto de la request
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Entrando ModificarProducto POST");
